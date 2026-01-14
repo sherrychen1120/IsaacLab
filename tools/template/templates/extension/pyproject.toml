@@ -1,3 +1,86 @@
 [build-system]
 requires = ["setuptools", "wheel", "toml"]
 build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+preview = true
+unstable = true
+
+[tool.flake8]
+show-source = true
+statistics = true
+
+per-file-ignores = [
+  "*/__init__.py:F401",
+]
+
+ignore = [
+  "E402",   # Module level import not at top of file
+  "E501",   # Line too long
+  "F403",   # Unable to detect undefined names
+  "W503",   # Line break before binary operator
+  "E203",   # Whitespace before ':' (Black conflict)
+  "D401",   # First line should be in imperative mood
+  "R504",   # Unnecessary variable assignment before return
+  "R505",   # Unnecessary elif after return statement
+  "SIM102", # Use a single if-statement instead of nested if-statements
+  "SIM117", # Merge with statements for context managers that have same scope.
+  "SIM118", # Checks for key-existence checks against dict.keys() calls.
+]
+
+max-line-length = 120
+max-complexity = 30
+
+exclude = [
+  "_**",
+  ".vscode",
+  ".git",
+  "docs/**",
+]
+
+# docstrings
+docstring-convention = "google"
+
+# annotations
+suppress-none-returning = true
+allow-star-arg-any = true
+
+[tool.isort]
+
+profile = "black"
+py_version = 310
+line_length = 120
+group_by_package = true
+
+# Files to skip
+skip_glob = ["docs/*", "logs/*", "_isaac_sim/*", ".vscode/*"]
+
+[tool.pyright]
+
+include = ["source", "scripts"]
+exclude = [
+    "**/__pycache__",
+    "**/_isaac_sim",
+    "**/docs",
+    "**/logs",
+    ".git",
+    ".vscode",
+]
+
+typeCheckingMode = "basic"
+pythonVersion = "3.11"
+pythonPlatform = "Linux"
+enableTypeIgnoreComments = true
+
+reportMissingImports = "none"
+reportMissingModuleSource = "none"
+reportGeneralTypeIssues = "none"
+reportOptionalMemberAccess = "warning"
+reportPrivateUsage = "warning"
+
+[tool.codespell]
+skip = '*.usd,*.svg,*.png,_isaac_sim*,*.bib,*.css,*/_build'
+quiet-level = 0
+ignore-words-list = "haa,slq,collapsable,buss,reacher"
