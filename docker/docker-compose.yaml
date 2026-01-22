@@ -74,6 +74,11 @@ x-default-isaac-lab-volumes: &default-isaac-lab-volumes
   - type: bind
     source: .isaac-lab-docker-history
     target: ${DOCKER_USER_HOME}/.bash_history
+    # Mount host gitconfig for git operations in container
+  - type: bind
+    source: ~/.gitconfig
+    target: ${DOCKER_USER_HOME}/.gitconfig
+    read_only: true
 
 x-default-isaac-lab-environment: &default-isaac-lab-environment
   - ISAACSIM_PATH=${DOCKER_ISAACLAB_PATH}/_isaac_sim
